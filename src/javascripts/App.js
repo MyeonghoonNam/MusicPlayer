@@ -1,5 +1,6 @@
 import { Intro, TabButtons, TopMusicList } from "./components/index.js";
 import { removeAllChildNodes } from "./utils/index.js";
+import { fetchMusicList } from "../apis/index.js";
 
 export default class App {
   constructor(props) {
@@ -7,7 +8,7 @@ export default class App {
     this.currentMainIndex = 0;
   }
 
-  setUp() {
+  async setUp() {
     const { el } = this.props;
     this.rootElement = document.querySelector(el);
 
@@ -16,6 +17,7 @@ export default class App {
     this.topMusicList = new TopMusicList();
 
     this.bindEvents();
+    await this.fetchMusicData();
     this.init();
   }
 
@@ -36,6 +38,13 @@ export default class App {
     this.topMusicList.on("addPlayList", (payload) => {
       // 기능 구현 필요
     });
+  }
+
+  async fetchMusicData() {
+    const response = await fetchMusicList();
+    const { musicList = [] } = response;
+
+    this.topMusicList.setMusicList(musicList);
   }
 
   init() {
