@@ -1,3 +1,7 @@
 import App from "./App.js";
 
-new App().init();
+const config = {
+  el: "#app",
+};
+
+new App(config).setUp();
