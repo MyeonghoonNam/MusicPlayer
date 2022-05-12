@@ -6,8 +6,10 @@ export default class TopMusicList {
   }
 
   static createRootElement() {
-    const topMusicList = document.createElement("section");
-    topMusicList.classList.add("contents-top5");
+    const rootElement = document.createElement("section");
+    rootElement.classList.add("contents-top5");
+
+    return rootElement;
   }
 
   bindEvents() {
@@ -69,7 +71,7 @@ export default class TopMusicList {
 
   on(eventName, callback) {
     this.events = this.events ?? {};
-    this.ecents[eventName] = callback;
+    this.events[eventName] = callback;
   }
 
   emit(eventName, payload) {
@@ -114,5 +116,7 @@ export default class TopMusicList {
 
     this.rootElement.innerHTML =
       topRoof + `<ol class="top5-list">` + musicList + `</ol>`;
+
+    return this.rootElement;
   }
 }
