@@ -20,16 +20,47 @@ export default class TopMusicList {
       const buttonRole = target.classList.item(1);
       switch (buttonRole) {
         case "icon-play":
-          // 음악 실행 함수 구현
+          this.requestPlay(target);
           break;
         case "icon-pause":
-          // 음악 중지 함수 구현
+          this.requestPause();
           break;
         case "icon-plus":
-          // 음악 추가 함수 궇현
+          this.requestAddPlayList(target);
           break;
       }
     });
+  }
+
+  renderPauseAll() {
+    const playingButtons = this.rootElement.querySelectAll(".icon-pause");
+
+    playingButtons.forEach((element) => {
+      element.classList.replace("icon-pause", "icon-play");
+    });
+  }
+
+  requestPlay(target) {
+    const controller = target.parentElement;
+    const { index: musicIndex } = controller.dataset;
+    const payload = { musicList: [...this.musicList], musicIndex };
+
+    this.emit("play", payload);
+    this.renderPauseAll();
+    target.classList.replace("icon-play", "icon-pause");
+  }
+
+  requestPause(target) {
+    this.emit("pause");
+    target.classList.replace("icon-pause", "icon-play");
+  }
+
+  requestAddPlayList(target) {
+    const controller = target.parentElement;
+    const { index: musicIndex } = controller.dataset;
+    const payload = { musicList: [...this.musicList], musicIndex };
+
+    this.emit("addPlayList", payload);
   }
 
   on(eventName, callback) {
@@ -63,7 +94,7 @@ export default class TopMusicList {
               <em class="music-artist">${artists[0]}</em>
             </div>
           </div>
-          <div class="music-simple-controller">
+          <div class="music-simple-controller" data-index=${index}>
             <button class="icon icon-play">
               <span class="invisible-text">재생</span>
             </button>
