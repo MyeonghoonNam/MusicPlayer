@@ -2,11 +2,34 @@ export default class TopMusicList {
   constructor() {
     this.rootElement = TopMusicList.createRootElement();
     this.musicList = [];
+    this.bindEvents();
   }
 
   static createRootElement() {
     const topMusicList = document.createElement("section");
     topMusicList.classList.add("contents-top5");
+  }
+
+  bindEvents() {
+    this.rootElement.addEventListener("click", (e) => {
+      const { target } = e;
+      const isControllerButton = target.tagName === "BUTTON";
+
+      if (!isControllerButton) return;
+
+      const buttonRole = target.classList.item(1);
+      switch (buttonRole) {
+        case "icon-play":
+          // 음악 실행 함수 구현
+          break;
+        case "icon-pause":
+          // 음악 중지 함수 구현
+          break;
+        case "icon-plus":
+          // 음악 추가 함수 궇현
+          break;
+      }
+    });
   }
 
   render() {
