@@ -63,6 +63,10 @@ export default class TopMusicList {
     this.emit("addPlayList", payload);
   }
 
+  setMusicList(musicList = []) {
+    this.musicList = [...musicList];
+  }
+
   on(eventName, callback) {
     this.events = this.events ?? {};
     this.ecents[eventName] = callback;
