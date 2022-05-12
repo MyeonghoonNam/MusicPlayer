@@ -5,7 +5,8 @@ import { fetchMusicList } from "../apis/index.js";
 export default class App {
   constructor(props) {
     this.props = props;
-    this.currentMainIndex = 0;
+    this.mainViewComponents = [];
+    this.currentMainViewIndex = 0;
   }
 
   async setUp() {
@@ -15,6 +16,7 @@ export default class App {
     this.intro = new Intro();
     this.tabButtons = new TabButtons();
     this.topMusicList = new TopMusicList();
+    this.mainViewComponents = [this.topMusicList];
 
     this.bindEvents();
     await this.fetchMusicData();
@@ -42,9 +44,9 @@ export default class App {
 
   async fetchMusicData() {
     const response = await fetchMusicList();
-    const { musicList = [] } = response;
+    const { musics = [] } = response;
 
-    this.topMusicList.setMusicList(musicList);
+    this.topMusicList.setMusicList(musics);
   }
 
   init() {
@@ -55,9 +57,18 @@ export default class App {
     }, 2000);
   }
 
+  renderMainView() {
+    const renderComponent = this.mainViewComponents[this.currentMainViewIndex];
+
+    return renderComponent && renderComponent.render();
+  }
+
   render() {
     removeAllChildNodes(this.rootElement);
     const tabButtons = this.tabButtons.render();
+    const mainView = this.renderMainView();
+
     this.rootElement.append(tabButtons);
+    this.rootElement.append(mainView);
   }
 }
