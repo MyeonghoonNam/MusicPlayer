@@ -32,6 +32,15 @@ export default class TopMusicList {
     });
   }
 
+  on(eventName, callback) {
+    this.events = this.events ?? {};
+    this.ecents[eventName] = callback;
+  }
+
+  emit(eventName, payload) {
+    this.events[eventName] && this.events[eventName](payload);
+  }
+
   render() {
     const topRoof = `
       <div class="top5-roof">
