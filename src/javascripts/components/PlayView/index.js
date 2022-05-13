@@ -25,6 +25,7 @@ export default class PlayView {
       this.emit("musicEnded", { repeat: this.repeat, random: this.random });
     });
 
+    let inervaler = 0;
     this.audio.addEventListener("timeupdate", () => {});
   }
 
@@ -125,6 +126,24 @@ export default class PlayView {
         randomButton.classList.add("on");
       } else {
         randomButton.classList.remove("on");
+      }
+    });
+
+    backwardButton.addEventListener("click", () => {
+      this.emit("backward");
+    });
+
+    forwardButton.addEventListener("click", () => {
+      this.emit("forward");
+    });
+
+    repeatButton.addEventListener("click", () => {
+      this.repeat = !this.repeat;
+
+      if (this.repeat) {
+        this.repeat.classList.add("on");
+      } else {
+        this.repeat.classList.remove("on");
       }
     });
   }

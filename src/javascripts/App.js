@@ -101,6 +101,14 @@ export default class App {
     this.playView.on("musicEnded", (payload) => {
       this.playList.playNextMusic(payload);
     });
+
+    this.playView.on("backward", () => {
+      this.playList.playPrevMusic();
+    });
+
+    this.playView.on("forward", () => {
+      this.playList.playNextMusic();
+    });
   }
 
   async fetchMusicData() {
