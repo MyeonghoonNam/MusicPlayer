@@ -49,7 +49,13 @@ export default class PlayList {
     }
   }
 
-  removeMusic(target) {}
+  removeMusic(target) {
+    const listItemElement = getClosestElement(target, "LI");
+    const musicIndex = findIndexListElement(listItemElement);
+
+    this.remove(musicIndex);
+    listItemElement.parentElement.removeChild(listItemElement);
+  }
 
   add() {
     this.musicList.push(music);
