@@ -1,7 +1,10 @@
+import { getClosestElement, findIndexListElement } from "../../utils/index.js";
+
 export default class PlayList {
   constructor() {
     this.rootElement = PlayList.createRootElement();
     this.musicList = [];
+    this.bindEvents();
   }
 
   static createRootElement() {
@@ -10,6 +13,43 @@ export default class PlayList {
 
     return rootElement;
   }
+
+  bindEvents() {
+    this.rootElement.addEventListener("click", (e) => {
+      const { target } = e;
+      const isControllerButton = target.tagName === "BUTTON";
+
+      if (!isControllerButton) {
+        return this.playMusic(target);
+      }
+
+      this.removeMusic(target);
+    });
+  }
+
+  playMusic(target) {
+    const listItemElement = getClosestElement(target, "LI");
+    const musicIndex = findIndexListElement(listItemElement);
+    const requestPlay = this.musicList[musicIndex].playing;
+
+    this.musicList.forEach((musicInfo) => {
+      musicInfo.playing = false;
+    });
+
+    this.rootElement
+      .querySelectorAll("li")
+      .forEach((el) => el.classList.remove("on"));
+
+    if (!requestPlay) {
+      listItemElement.classList.add("on");
+      this.musicList[musicIndex].playing = true;
+      this.emit("playMusic", { musicList: this.musicList, musicIndex });
+    } else {
+      this.emit("pauseMusic");
+    }
+  }
+
+  removeMusic(target) {}
 
   on(eventName, callback) {
     this.events = this.events ? this.events : {};
