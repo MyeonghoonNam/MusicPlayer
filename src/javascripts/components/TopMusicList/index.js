@@ -6,7 +6,7 @@ export default class TopMusicList {
   }
 
   static createRootElement() {
-    const rootElement = document.createElement("section");
+    const rootElement = document.createElement("article");
     rootElement.classList.add("contents-top5");
 
     return rootElement;
