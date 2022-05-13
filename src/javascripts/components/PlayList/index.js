@@ -11,6 +11,15 @@ export default class PlayList {
     return rootElement;
   }
 
+  on(eventName, callback) {
+    this.events = this.events ? this.events : {};
+    this.events[eventName] = callback;
+  }
+
+  emit(eventName, payload) {
+    this.events[eventName] = this.events[eventName](payload);
+  }
+
   render() {
     const playListTitle = `<h2 class="playlist-title">My PlayList</h2>`;
     const musicList = this.musicList
