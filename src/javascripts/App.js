@@ -1,4 +1,9 @@
-import { Intro, TabButtons, TopMusicList } from "./components/index.js";
+import {
+  Intro,
+  SearchView,
+  TabButtons,
+  TopMusicList,
+} from "./components/index.js";
 import { removeAllChildNodes } from "./utils/index.js";
 import { fetchMusicList } from "../apis/index.js";
 
@@ -16,7 +21,9 @@ export default class App {
     this.intro = new Intro();
     this.tabButtons = new TabButtons();
     this.topMusicList = new TopMusicList();
-    this.mainViewComponents = [this.topMusicList];
+    this.searchView = new SearchView();
+
+    this.mainViewComponents = [this.topMusicList, "", this.searchView];
 
     this.bindEvents();
     await this.fetchMusicData();
@@ -26,7 +33,8 @@ export default class App {
   bindEvents() {
     this.tabButtons.on("clickTab", (payload) => {
       const { currentIndex = 0 } = payload;
-      this.currentMainIndex = currentIndex;
+      this.currentMainViewIndex = currentIndex;
+      this.render();
     });
 
     this.topMusicList.on("play", (payload) => {
@@ -38,6 +46,38 @@ export default class App {
     });
 
     this.topMusicList.on("addPlayList", (payload) => {
+      // 기능 구현 필요
+    });
+
+    this.searchView.on("searchMusic", (query) => {
+      if (!query) {
+        console.log(query, "none query");
+        return this.searchView.setSearchMusicList([]);
+      }
+
+      const searchedMusicList = this.topMusicList.musicList.filter((music) => {
+        const { artists, title } = music;
+        const upperCaseQuery = query.toUpperCase();
+        const filteringName = artists.some((artist) =>
+          artist.toUpperCase().includes(upperCaseQuery)
+        );
+        const filteringTitle = title.toUpperCase().includes(upperCaseQuery);
+
+        return filteringName || filteringTitle;
+      });
+
+      this.searchView.setSearchMusicList(searchedMusicList);
+    });
+
+    this.searchView.on("play", (payload) => {
+      // 기능 구현 필요
+    });
+
+    this.searchView.on("pause", () => {
+      // 기능 구현 필요
+    });
+
+    this.searchView.on("addPlayList", (payload) => {
       // 기능 구현 필요
     });
   }
