@@ -89,6 +89,16 @@ export default class PlayList {
     this.playMusic(nextIndex);
   }
 
+  playPrevMusic() {
+    let currentIndex = this.musicList.findIndex((music) => music.playing);
+    if (currentIndex <= 0) {
+      currentIndex = this.musicList.length;
+    }
+
+    const prevIndex = currentIndex - 1;
+    this.playMusic(prevIndex);
+  }
+
   loadStorage() {
     const stringifiedPlayList = localStorage.getItem("playlist");
 
