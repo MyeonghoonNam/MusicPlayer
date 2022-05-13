@@ -1,5 +1,6 @@
 import {
   Intro,
+  PlayList,
   SearchView,
   TabButtons,
   TopMusicList,
@@ -22,8 +23,13 @@ export default class App {
     this.tabButtons = new TabButtons();
     this.topMusicList = new TopMusicList();
     this.searchView = new SearchView();
+    this.playList = new PlayList();
 
-    this.mainViewComponents = [this.topMusicList, "", this.searchView];
+    this.mainViewComponents = [
+      this.topMusicList,
+      this.playList,
+      this.searchView,
+    ];
 
     this.bindEvents();
     await this.fetchMusicData();
@@ -46,12 +52,20 @@ export default class App {
     });
 
     this.topMusicList.on("addPlayList", (payload) => {
-      // 기능 구현 필요
+      const { musicList, musicIndex } = payload;
+      this.playList.add(musicList[musicIndex]);
+    });
+
+    this.playList.on("play", () => {
+      // play view 구현 필요
+    });
+
+    this.playList.on("pause", () => {
+      // play view 구현 필요
     });
 
     this.searchView.on("searchMusic", (query) => {
       if (!query) {
-        console.log(query, "none query");
         return this.searchView.setSearchMusicList([]);
       }
 
@@ -78,7 +92,8 @@ export default class App {
     });
 
     this.searchView.on("addPlayList", (payload) => {
-      // 기능 구현 필요
+      const { musicList, musicIndex } = payload;
+      this.playList.add(musicList[musicIndex]);
     });
   }
 

@@ -57,7 +57,7 @@ export default class PlayList {
     listItemElement.parentElement.removeChild(listItemElement);
   }
 
-  add() {
+  add(music) {
     this.musicList.push(music);
     this.saveStorage();
   }
@@ -110,11 +110,14 @@ export default class PlayList {
     }
   }
 
-  savaStorage() {
+  saveStorage() {
     const musicList = this.musicList.map(
-      ({ cover, source, title, artists }) => {
-        cover, source, title, artists;
-      }
+      ({ cover, source, title, artists }) => ({
+        cover,
+        source,
+        title,
+        artists,
+      })
     );
 
     try {
@@ -144,7 +147,7 @@ export default class PlayList {
           <div class="music-content">
             <div class="music-data">
               <div class="music-cover">
-                <img src=${cover}/>
+                <img src=${cover} />
               </div>
               <div class="music-info">
                 <strong class="music-title">${title}</strong>
