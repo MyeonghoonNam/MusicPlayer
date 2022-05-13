@@ -51,6 +51,31 @@ export default class PlayList {
 
   removeMusic(target) {}
 
+  loadStorage() {
+    const stringifiedPlayList = localStorage.getItem("playlist");
+
+    try {
+      const playList = JSON.parse(stringifiedPlayList);
+      this.musicList = playList instanceof Array ? playList : [];
+    } catch (e) {
+      console.error(e);
+    }
+  }
+
+  savaStorage() {
+    const musicList = this.musicList.map(
+      ({ cover, source, title, artists }) => {
+        cover, source, title, artists;
+      }
+    );
+
+    try {
+      localStorage.setItem("playlist", JSON.stringify(musicList));
+    } catch (e) {
+      console.error(e);
+    }
+  }
+
   on(eventName, callback) {
     this.events = this.events ? this.events : {};
     this.events[eventName] = callback;
