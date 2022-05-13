@@ -1,8 +1,6 @@
 const removeAllChildNodes = (parent) => {
-  const firstChild = parent.firstChild;
-
-  while (firstChild) {
-    parent.removeChild(firstChild);
+  while (parent.firstChild) {
+    parent.removeChild(parent.firstChild);
   }
 };
 
