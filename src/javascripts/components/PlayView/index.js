@@ -1,20 +1,55 @@
 export default class PlayView {
   constructor() {
-    this.renderElement = PlayView.createRenderElement();
+    this.rootElement = PlayView.createRenderElement();
     this.playViewMusic = null;
+    this.audio = new Audio();
+    this.repeat = false;
+    this.random = false;
+    this.bindEvents();
   }
 
   static createRenderElement() {
-    const renderElement = document.createElement("article");
-    renderElement.classList.add("play-view");
+    const rootElement = document.createElement("article");
+    rootElement.classList.add("play-view");
 
-    return renderElement;
+    return rootElement;
+  }
+
+  bindEvents() {
+    this.audio.addEventListener("ended", () => {
+      const fromPauseToPlay = this.rootElement.querySelector(".control-play");
+      const fromPlayToPause = this.rootElement.querySelector(".control-pause");
+
+      fromPlayToPause.classList.add("hide");
+      fromPauseToPlay.classList.remove("hide");
+      this.emit("musicEnded", { repeat: this.repeat, random: this.random });
+    });
+
+    this.audio.addEventListener("timeupdate", () => {});
+  }
+
+  playMusic(payload) {
+    this.pause();
+
+    if (payload) {
+      const { musicList, musicIndex } = payload;
+
+      this.audio.src = musicList[musicIndex].source;
+      this.playViewMusic = musicList[musicIndex];
+      this.render();
+    }
+
+    this.audio.play();
+  }
+
+  pause() {
+    this.audio.pause();
   }
 
   render() {
     const { cover, artists, title } = this.playViewMusic;
 
-    this.renderElement.innerHTML = `
+    this.rootElement.innerHTML = `
       <div class="play-view-container">
         <h2 class="invisible-text>Play View</h2>
         <button class="back-button">
@@ -58,5 +93,29 @@ export default class PlayView {
         </div>
       </div>
     `;
+
+    const playButton = this.rootElement.querySelector(".control-play");
+    const pauseButton = this.rootElement.querySelector(".control-pause");
+
+    playButton.addEventListener("click", (e) => {
+      this.playMusic();
+      playButton.classList.add("hide");
+      pauseButton.classList.remove("hide");
+    });
+
+    pauseButton.addEventListener("click", (e) => {
+      this.pause();
+      pauseButton.classList.add("hide");
+      playButton.classList.remove("hide");
+    });
+  }
+
+  on(eventName, callback) {
+    this.events = this.events[eventName] ?? {};
+    this.events[eventName] = callback;
+  }
+
+  emit(eventName, payload) {
+    this.events[eventName] && this.events[eventName](payload);
   }
 }

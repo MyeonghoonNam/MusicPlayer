@@ -4,6 +4,7 @@ import {
   SearchView,
   TabButtons,
   TopMusicList,
+  PlayView,
 } from "./components/index.js";
 import { removeAllChildNodes } from "./utils/index.js";
 import { fetchMusicList } from "../apis/index.js";
@@ -24,6 +25,7 @@ export default class App {
     this.topMusicList = new TopMusicList();
     this.searchView = new SearchView();
     this.playList = new PlayList();
+    this.playView = new PlayView();
 
     this.mainViewComponents = [
       this.topMusicList,
