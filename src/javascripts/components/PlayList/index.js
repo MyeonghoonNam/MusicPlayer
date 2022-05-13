@@ -67,6 +67,28 @@ export default class PlayList {
     this.saveStorage();
   }
 
+  playNextMusic(payload) {
+    let currentIndex = this.musicList.findIndex((music) => music.playing);
+    const isMusicIndexEnd = currentIndex >= this.musicList.length - 1;
+
+    if (isMusicIndexEnd) {
+      currentIndex = -1;
+    }
+
+    if (payload) {
+      const { repeat, random } = payload;
+
+      if (!random && !repeat && isMusicIndexEnd) return;
+
+      if (random) {
+        currentIndex = Math.floor(Math.random() * this.musicList.length);
+      }
+    }
+
+    const nextIndex = currentIndex + 1;
+    this.playMusic(nextIndex);
+  }
+
   loadStorage() {
     const stringifiedPlayList = localStorage.getItem("playlist");
 
