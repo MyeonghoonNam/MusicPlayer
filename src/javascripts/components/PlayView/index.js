@@ -64,22 +64,26 @@ export default class PlayView {
         </div>
         <div class="play-view-controller">
           <div class="controller-container">
-            <button class="control-button control-repeat ${this.repeat && "on"}>
+            <button class="control-button control-repeat ${
+              this.repeat && "on"
+            }">
               <i class="icon-controller-repeat"></i>
             </button>
-            <button class="control-button control-backward>
+            <button class="control-button control-backward">
               <i class="icon-controller-backward"></i>
             </button>
-            <button class="control-button control-play hide>
+            <button class="control-button control-play hide">
               <i class="icon-controller-play"></i>
             </button>
-            <button class="control-button control-pause>
+            <button class="control-button control-pause">
               <i class="icon-controller-pause"></i>
             </button>
-            <button class="control-button control-forward>
+            <button class="control-button control-forward">
               <i class="icon-controller-forward"></i>
             </button>
-            <button class="control-button control-rotate ${this.random && "on"}>
+            <button class="control-button control-rotate ${
+              this.random && "on"
+            }">
               <i class="icon-controller-rotate"></i>
             </button>
           </div>
@@ -97,17 +101,25 @@ export default class PlayView {
     const playButton = this.rootElement.querySelector(".control-play");
     const pauseButton = this.rootElement.querySelector(".control-pause");
 
-    playButton.addEventListener("click", (e) => {
+    playButton.addEventListener("click", () => {
       this.playMusic();
       playButton.classList.add("hide");
       pauseButton.classList.remove("hide");
     });
 
-    pauseButton.addEventListener("click", (e) => {
+    pauseButton.addEventListener("click", () => {
       this.pause();
       pauseButton.classList.add("hide");
       playButton.classList.remove("hide");
     });
+  }
+
+  show() {
+    document.body.append(this.rootElement);
+  }
+
+  hide() {
+    document.body.removeChild(this.rootElement);
   }
 
   on(eventName, callback) {

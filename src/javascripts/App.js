@@ -46,11 +46,11 @@ export default class App {
     });
 
     this.topMusicList.on("play", (payload) => {
-      // 기능 구현 필요
+      this.playView.playMusic(payload);
     });
 
     this.topMusicList.on("pause", () => {
-      // 기능 구현 필요
+      this.playView.pause();
     });
 
     this.topMusicList.on("addPlayList", (payload) => {
@@ -59,11 +59,11 @@ export default class App {
     });
 
     this.playList.on("play", () => {
-      // play view 구현 필요
+      this.playView.playMusic(payload);
     });
 
     this.playList.on("pause", () => {
-      // play view 구현 필요
+      this.playView.pause();
     });
 
     this.searchView.on("searchMusic", (query) => {
@@ -86,11 +86,11 @@ export default class App {
     });
 
     this.searchView.on("play", (payload) => {
-      // 기능 구현 필요
+      this.playView.playMusic(payload);
     });
 
     this.searchView.on("pause", () => {
-      // 기능 구현 필요
+      this.playView.pause();
     });
 
     this.searchView.on("addPlayList", (payload) => {
