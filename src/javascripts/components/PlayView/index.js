@@ -100,6 +100,11 @@ export default class PlayView {
 
     const playButton = this.rootElement.querySelector(".control-play");
     const pauseButton = this.rootElement.querySelector(".control-pause");
+    const randomButton = this.rootElement.querySelector(".control-random");
+    const repeatButton = this.rootElement.querySelector(".control-repeat");
+    const backwardButton = this.rootElement.querySelector(".control-backward");
+    const forwardButton = this.rootElement.querySelector(".control-forward");
+    const progress = this.rootElement.querySelector(".progress");
 
     playButton.addEventListener("click", () => {
       this.playMusic();
@@ -111,6 +116,16 @@ export default class PlayView {
       this.pause();
       pauseButton.classList.add("hide");
       playButton.classList.remove("hide");
+    });
+
+    randomButton.addEventListener("click", () => {
+      this.random = !this.random;
+
+      if (this.random) {
+        randomButton.classList.add("on");
+      } else {
+        randomButton.classList.remove("on");
+      }
     });
   }
 

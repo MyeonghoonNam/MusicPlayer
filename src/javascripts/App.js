@@ -97,6 +97,10 @@ export default class App {
       const { musicList, musicIndex } = payload;
       this.playList.add(musicList[musicIndex]);
     });
+
+    this.playView.on("musicEnded", (payload) => {
+      this.playList.playNextMusic(payload);
+    });
   }
 
   async fetchMusicData() {
