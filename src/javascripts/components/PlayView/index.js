@@ -25,8 +25,19 @@ export default class PlayView {
       this.emit("musicEnded", { repeat: this.repeat, random: this.random });
     });
 
-    let inervaler = 0;
-    this.audio.addEventListener("timeupdate", () => {});
+    let intervaler = 0;
+    this.audio.addEventListener("timeupdate", () => {
+      intervaler += 1;
+
+      if (intervaler % 3 !== 0) return;
+
+      const audioProgress =
+        (this.audio.currentTime / this.audio.duration) * 100;
+      const controlProgress = audioProgress > 100 ? 100 : audioProgress;
+      const progressBarElement = this.rootElement.querySelector(".progress");
+
+      progressBarElement.value = controlProgress ? controlProgress * 10 : 0;
+    });
   }
 
   playMusic(payload) {
@@ -145,6 +156,13 @@ export default class PlayView {
       } else {
         this.repeat.classList.remove("on");
       }
+    });
+
+    progress.addEventListener("change", (event) => {
+      const targetTime =
+        (this.audio.duration * Number(event.target.value)) / 1000;
+
+      this.audio.currentTime = targetTime;
     });
   }
 
