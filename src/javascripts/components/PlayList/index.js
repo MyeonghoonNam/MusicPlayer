@@ -51,6 +51,16 @@ export default class PlayList {
 
   removeMusic(target) {}
 
+  add() {
+    this.musicList.push(music);
+    this.saveStorage();
+  }
+
+  remove(index) {
+    this.musicList.splice(index, 1);
+    this.saveStorage();
+  }
+
   loadStorage() {
     const stringifiedPlayList = localStorage.getItem("playlist");
 
