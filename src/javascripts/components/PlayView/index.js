@@ -175,7 +175,7 @@ export default class PlayView {
   }
 
   on(eventName, callback) {
-    this.events = this.events[eventName] ?? {};
+    this.events = this.events ?? {};
     this.events[eventName] = callback;
   }
 
