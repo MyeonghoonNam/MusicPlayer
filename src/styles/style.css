@@ -168,3 +168,17 @@
 .music-list li.on .music-title {
   color: var(--main-color);
 }
+
+.search-controller {
+  position: relative;
+  padding: 23px;
+}
+
+.search-input {
+  width: -webkit-fill-available;
+  height: 36px;
+  border: none;
+  border-radius: 35px;
+  background-color: #f2f2f2;
+  padding: 0 48px 0 24px;
+}
