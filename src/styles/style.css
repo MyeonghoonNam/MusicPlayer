@@ -112,3 +112,38 @@
   display: flex;
   align-items: center;
 }
+
+.app-controller {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  position: fixed;
+  width: 100%;
+  height: 80px;
+  bottom: 0;
+  background-color: #f2f2f2;
+}
+
+.app-controller li {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 10px;
+}
+
+.app-controller li.on {
+  color: var(--main-color);
+}
+
+.button-app-controller {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.invisivle-text {
+  position: fixed;
+  top: -100px;
+}
