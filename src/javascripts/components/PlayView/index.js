@@ -35,14 +35,28 @@ export default class PlayView {
         (this.audio.currentTime / this.audio.duration) * 100;
       const controlProgress = audioProgress > 100 ? 100 : audioProgress;
       const progressBarElement = this.rootElement.querySelector(".progress");
-
+      const currentTimeElement =
+        this.rootElement.querySelector(".current-time");
+      const endTimeElement = this.rootElement.querySelector(".end-time");
+      const total_time = parseInt(this.audio.duration);
       progressBarElement.value = controlProgress ? controlProgress * 10 : 0;
+
+      const current_minute = parseInt((this.audio.currentTime / 60) % 60);
+      let current_second = parseInt(this.audio.currentTime % 60);
+
+      if (current_second < 10) {
+        current_second = "0" + current_second;
+      }
+
+      currentTimeElement.innerHTML = `${current_minute}:${current_second}`;
+
+      const end_minute = parseInt(total_time / 60);
+      const end_second = parseInt(total_time % 60);
+      endTimeElement.innerHTML = `${end_minute}:${end_second}`;
     });
   }
 
   playMusic(payload) {
-    this.pause();
-
     if (payload) {
       const { musicList, musicIndex } = payload;
 
@@ -63,7 +77,7 @@ export default class PlayView {
 
     this.rootElement.innerHTML = `
       <div class="play-view-container">
-        <h2 class="invisible-text>Play View</h2>
+        <h2 class="invisible-text">Play View</h2>
         <button class="back-button">
           <i class="icon-controller-back"></i>
         </button>
@@ -102,8 +116,8 @@ export default class PlayView {
           <div class="progress-container">
             <input class="progress" type="range" min="0" max="1000" value="0">
             <div class="progress-time">
-              <div class="current-time">0:02</div>
-              <div class="end-time">3:56</div>
+              <div class="current-time"></div>
+              <div class="end-time"></div>
             </div>
           </div>
         </div>
