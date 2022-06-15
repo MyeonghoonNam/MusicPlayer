@@ -4,6 +4,7 @@ export default class PlayList {
   constructor() {
     this.rootElement = PlayList.createRootElement();
     this.musicList = [];
+    this.loadStorage();
     this.bindEvents();
   }
 
@@ -43,9 +44,9 @@ export default class PlayList {
     if (!requestPlay) {
       listItemElement.classList.add("on");
       this.musicList[musicIndex].playing = true;
-      this.emit("playMusic", { musicList: this.musicList, musicIndex });
+      this.emit("play", { musicList: this.musicList, musicIndex });
     } else {
-      this.emit("pauseMusic");
+      this.emit("pause");
     }
   }
 

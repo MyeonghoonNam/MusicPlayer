@@ -58,8 +58,9 @@ export default class App {
       this.playList.add(musicList[musicIndex]);
     });
 
-    this.playList.on("play", () => {
+    this.playList.on("play", (payload) => {
       this.playView.playMusic(payload);
+      this.playView.show();
     });
 
     this.playList.on("pause", () => {

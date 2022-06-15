@@ -112,7 +112,7 @@ export default class PlayView {
 
     const playButton = this.rootElement.querySelector(".control-play");
     const pauseButton = this.rootElement.querySelector(".control-pause");
-    const randomButton = this.rootElement.querySelector(".control-random");
+    const randomButton = this.rootElement.querySelector(".control-rotate");
     const repeatButton = this.rootElement.querySelector(".control-repeat");
     const backwardButton = this.rootElement.querySelector(".control-backward");
     const forwardButton = this.rootElement.querySelector(".control-forward");

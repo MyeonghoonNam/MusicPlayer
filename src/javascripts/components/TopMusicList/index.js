@@ -25,7 +25,7 @@ export default class TopMusicList {
           this.requestPlay(target);
           break;
         case "icon-pause":
-          this.requestPause();
+          this.requestPause(target);
           break;
         case "icon-plus":
           this.requestAddPlayList(target);
@@ -35,7 +35,7 @@ export default class TopMusicList {
   }
 
   renderPauseAll() {
-    const playingButtons = this.rootElement.querySelectAll(".icon-pause");
+    const playingButtons = this.rootElement.querySelectorAll(".icon-pause");
 
     playingButtons.forEach((element) => {
       element.classList.replace("icon-pause", "icon-play");
@@ -54,6 +54,7 @@ export default class TopMusicList {
 
   requestPause(target) {
     this.emit("pause");
+    console.log(target);
     target.classList.replace("icon-pause", "icon-play");
   }
 
