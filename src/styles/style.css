@@ -74,6 +74,12 @@
   padding-right: 20px;
 }
 
+.music-controller {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .music-cover {
   width: 50px;
   height: 50px;
@@ -143,7 +149,7 @@
   height: 100%;
 }
 
-.invisivle-text {
+.invisible-text {
   position: fixed;
   top: -100px;
 }
@@ -374,6 +380,7 @@
   height: 20px;
   margin-bottom: 6px;
   background-size: 20px;
+  background-repeat: no-repeat;
 }
 
 .icon + .icon {
@@ -384,8 +391,16 @@
   background-image: url(../assets/icons/play.png);
 }
 
+.icon-pause {
+  background-image: url(../assets/icons/pause.png);
+}
+
 .icon-plus {
   background-image: url(../assets/icons/plus.png);
+}
+
+.icon-minus {
+  background-image: url(../assets/icons/minus.png);
 }
 
 .icon-top5 {
@@ -410,4 +425,8 @@
 
 .on .icon-search {
   background-image: url(../assets/icons/search_on.png);
+}
+
+.hide {
+  display: none;
 }
