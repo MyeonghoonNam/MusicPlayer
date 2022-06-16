@@ -29,7 +29,10 @@ export default class PlayList {
   }
 
   playMusic(target) {
-    const listItemElement = getClosestElement(target, "LI");
+    const listItemElement =
+      typeof target === "number"
+        ? this.rootElement.querySelectorAll("LI")[target]
+        : getClosestElement(target, "LI");
     const musicIndex = findIndexListElement(listItemElement);
     const requestPlay = this.musicList[musicIndex].playing;
 
@@ -134,7 +137,7 @@ export default class PlayList {
   }
 
   emit(eventName, payload) {
-    this.events[eventName] = this.events[eventName](payload);
+    this.events[eventName] && this.events[eventName](payload);
   }
 
   render() {
