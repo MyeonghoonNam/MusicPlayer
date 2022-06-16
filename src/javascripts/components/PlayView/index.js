@@ -124,6 +124,7 @@ export default class PlayView {
       </div>
     `;
 
+    const backButton = this.rootElement.querySelector(".back-button");
     const playButton = this.rootElement.querySelector(".control-play");
     const pauseButton = this.rootElement.querySelector(".control-pause");
     const randomButton = this.rootElement.querySelector(".control-rotate");
@@ -131,6 +132,10 @@ export default class PlayView {
     const backwardButton = this.rootElement.querySelector(".control-backward");
     const forwardButton = this.rootElement.querySelector(".control-forward");
     const progress = this.rootElement.querySelector(".progress");
+
+    backButton.addEventListener("click", () => {
+      this.hide();
+    });
 
     playButton.addEventListener("click", () => {
       this.playMusic();
