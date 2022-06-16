@@ -54,7 +54,6 @@ export default class TopMusicList {
 
   requestPause(target) {
     this.emit("pause");
-    console.log(target);
     target.classList.replace("icon-pause", "icon-play");
   }
 
