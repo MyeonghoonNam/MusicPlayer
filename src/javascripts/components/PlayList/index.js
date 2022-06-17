@@ -83,6 +83,8 @@ export default class PlayList {
       if (random) {
         currentIndex = Math.floor(Math.random() * this.musicList.length);
         this.playMusic(currentIndex);
+      } else if (repeat) {
+        this.playMusic(currentIndex);
       }
     } else {
       const isMusicIndexEnd = currentIndex >= this.musicList.length - 1;
