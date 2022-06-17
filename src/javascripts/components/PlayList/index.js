@@ -34,7 +34,7 @@ export default class PlayList {
         ? this.rootElement.querySelectorAll("LI")[target]
         : getClosestElement(target, "LI");
     const musicIndex = findIndexListElement(listItemElement);
-    const requestPlay = this.musicList[musicIndex].playing;
+    // const requestPlay = this.musicList[musicIndex].playing;
 
     this.musicList.forEach((musicInfo) => {
       musicInfo.playing = false;
@@ -44,13 +44,16 @@ export default class PlayList {
       .querySelectorAll("li")
       .forEach((el) => el.classList.remove("on"));
 
-    if (!requestPlay) {
-      listItemElement.classList.add("on");
-      this.musicList[musicIndex].playing = true;
-      this.emit("play", { musicList: this.musicList, musicIndex });
-    } else {
-      this.emit("pause");
-    }
+    listItemElement.classList.add("on");
+    this.musicList[musicIndex].playing = true;
+    this.emit("play", { musicList: this.musicList, musicIndex });
+    // if (!requestPlay) {
+    //   listItemElement.classList.add("on");
+    //   this.musicList[musicIndex].playing = true;
+    //   this.emit("play", { musicList: this.musicList, musicIndex });
+    // } else {
+    //   this.emit("pause");
+    // }
   }
 
   removeMusic(target) {
@@ -73,24 +76,24 @@ export default class PlayList {
 
   playNextMusic(payload) {
     let currentIndex = this.musicList.findIndex((music) => music.playing);
-    const isMusicIndexEnd = currentIndex >= this.musicList.length - 1;
-
-    if (isMusicIndexEnd) {
-      currentIndex = -1;
-    }
 
     if (payload) {
-      const { repeat, random } = payload;
-
-      if (!random && !repeat && isMusicIndexEnd) return;
+      const { random, repeat } = payload;
 
       if (random) {
         currentIndex = Math.floor(Math.random() * this.musicList.length);
+        this.playMusic(currentIndex);
       }
-    }
+    } else {
+      const isMusicIndexEnd = currentIndex >= this.musicList.length - 1;
 
-    const nextIndex = currentIndex + 1;
-    this.playMusic(nextIndex);
+      if (isMusicIndexEnd) {
+        currentIndex = -1;
+      }
+
+      const nextIndex = currentIndex + 1;
+      this.playMusic(nextIndex);
+    }
   }
 
   playPrevMusic() {

@@ -90,8 +90,8 @@ export default class PlayView {
         </div>
         <div class="play-view-controller">
           <div class="controller-container">
-            <button class="control-button control-repeat ${
-              this.repeat && "on"
+            <button class="control-button control-rotate ${
+              this.random ? "on" : ""
             }">
               <i class="icon-controller-repeat"></i>
             </button>
@@ -107,8 +107,8 @@ export default class PlayView {
             <button class="control-button control-forward">
               <i class="icon-controller-forward"></i>
             </button>
-            <button class="control-button control-rotate ${
-              this.random && "on"
+            <button class="control-button control-repeat ${
+              this.repeat ? "on" : ""
             }">
               <i class="icon-controller-rotate"></i>
             </button>
@@ -171,9 +171,9 @@ export default class PlayView {
       this.repeat = !this.repeat;
 
       if (this.repeat) {
-        this.repeat.classList.add("on");
+        repeatButton.classList.add("on");
       } else {
-        this.repeat.classList.remove("on");
+        repeatButton.classList.remove("on");
       }
     });
 
