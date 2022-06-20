@@ -34,7 +34,6 @@ export default class PlayList {
         ? this.rootElement.querySelectorAll("LI")[target]
         : getClosestElement(target, "LI");
     const musicIndex = findIndexListElement(listItemElement);
-    // const requestPlay = this.musicList[musicIndex].playing;
 
     this.musicList.forEach((musicInfo) => {
       musicInfo.playing = false;
@@ -47,13 +46,6 @@ export default class PlayList {
     listItemElement.classList.add("on");
     this.musicList[musicIndex].playing = true;
     this.emit("play", { musicList: this.musicList, musicIndex });
-    // if (!requestPlay) {
-    //   listItemElement.classList.add("on");
-    //   this.musicList[musicIndex].playing = true;
-    //   this.emit("play", { musicList: this.musicList, musicIndex });
-    // } else {
-    //   this.emit("pause");
-    // }
   }
 
   removeMusic(target) {
