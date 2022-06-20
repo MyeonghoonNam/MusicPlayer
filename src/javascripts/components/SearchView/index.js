@@ -44,7 +44,7 @@ export default class SearchView {
           this.requestPlay(target);
           break;
         case "icon-pause":
-          this.requestPause();
+          this.requestPause(target);
           break;
         case "icon-plus":
           this.requestAddPlayList(target);
@@ -59,7 +59,7 @@ export default class SearchView {
   }
 
   renderPauseAll() {
-    const playingButtons = this.rootElement.querySelectAll(".icon-pause");
+    const playingButtons = this.rootElement.querySelectorAll(".icon-pause");
 
     playingButtons.forEach((element) => {
       element.classList.replace("icon-pause", "icon-play");
@@ -69,7 +69,7 @@ export default class SearchView {
   requestPlay(target) {
     const controller = target.parentElement;
     const { index: musicIndex } = controller.dataset;
-    const payload = { musicList: [...this.musicList], musicIndex };
+    const payload = { musicList: [...this.searchedMusicList], musicIndex };
 
     this.emit("play", payload);
     this.renderPauseAll();
@@ -84,7 +84,7 @@ export default class SearchView {
   requestAddPlayList(target) {
     const controller = target.parentElement;
     const { index: musicIndex } = controller.dataset;
-    const payload = { musicList: [...this.musicList], musicIndex };
+    const payload = { musicList: [...this.searchedMusicList], musicIndex };
 
     this.emit("addPlayList", payload);
   }
