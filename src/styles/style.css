@@ -231,13 +231,16 @@
   background-size: 24px;
 }
 
-.play-view .cover-wrapper {
+.play-view .cover-container {
+  width: 100%;
+  height: 292px;
   margin: 34px auto 26px;
   border-radius: 16px;
   overflow: hidden;
 }
 
-.play-view .cover-wrapper img {
+.play-view .cover-container img {
+  width: 100%;
   height: 100%;
   object-fit: cover;
 }
@@ -305,7 +308,7 @@
   background-size: 40px;
 }
 
-.play-view .icon-controller-foward {
+.play-view .icon-controller-forward {
   display: block;
   width: 24px;
   height: 24px;
