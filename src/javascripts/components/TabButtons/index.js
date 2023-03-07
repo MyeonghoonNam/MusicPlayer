@@ -21,7 +21,7 @@ export default class TabButtons {
         return `
         <li>
           <button type="button" class="button-app-controller">
-            <i class="tap-icon" ${tab.iconName}></i>
+            <i class="tab-icon ${tab.iconName}"></i>
             ${tab.title}
           </button>
         </li>
